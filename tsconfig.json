@@ -1,0 +1,27 @@
+{
+	"compilerOptions": {
+		"module": "none",
+		"target": "es5",
+		"outFile": "js/app.js",
+		"watch": true,
+		"noImplicitAny": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"sourceMap": true,
+		"inlineSources": true,
+		"declaration": true,
+		"typeRoots": [
+			"lib/"
+		]
+	},
+	"files": [
+		"lib/tweenlite.d.ts",
+		"lib/pixi.d.ts"
+	],
+	"include": [
+		"ts/**/*.ts"
+	],
+	"exclude": [
+		"js/*"
+	]
+}
