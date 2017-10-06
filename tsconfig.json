@@ -1,27 +1,16 @@
 {
-	"compilerOptions": {
-		"module": "none",
-		"target": "es5",
-		"outFile": "js/app.js",
-		"watch": true,
-		"noImplicitAny": true,
-		"removeComments": true,
-		"preserveConstEnums": true,
-		"sourceMap": true,
-		"inlineSources": true,
-		"declaration": true,
-		"typeRoots": [
-			"lib/"
-		]
-	},
-	"files": [
-		"lib/tweenlite.d.ts",
-		"lib/pixi.d.ts"
-	],
-	"include": [
-		"ts/**/*.ts"
-	],
-	"exclude": [
-		"js/*"
-	]
+    "version": "1.0.0",
+    "compilerOptions": {
+        "target": "es5",
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "removeComments": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "outDir": "dist"
+    },
+    "exclude": [
+        "node_modules"
+    ]
 }
