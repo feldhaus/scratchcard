@@ -11,18 +11,18 @@ https://nodejs.org
 
 ### 3. Install dependencies:
 Navigate to the cloned repo's directory and run:
-```npm install```
+```npm install```.
 
 ### 4. Run the development server:
 Run the following command in the cloned repo's directory:
-```npm start```
+```npm run dev```.
 This will run a server so you can run the game in a browser.
 Open your browser and enter localhost:9000 into the address bar.
 Also this will start a watch process, so you can change the source and the process will recompile and refresh the browser
 
 ### 5. Build for deployment:
 Run the following command in the cloned repo's directory:
-```npm run build```
+```npm run build```.
 This will optimize and minimize the compiled bundle in the dist folder.
 
 ## Credits

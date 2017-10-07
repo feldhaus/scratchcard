@@ -2,28 +2,19 @@ import * as PIXI from 'pixi.js';
 
 import { Tile } from './tile';
 import { SimpleButton } from './button';
+import { AnimatedCoins } from './animatedcoins';
 
-export const VALUES = [
-    {value: 0,      img: 'assets/images/tile_scratched_freeplay@2x.png'},
-    {value: 2,      img: 'assets/images/tile_scratched_prize_01@2x.png'},
-    {value: 5,      img: 'assets/images/tile_scratched_prize_02@2x.png'},
-    {value: 10,     img: 'assets/images/tile_scratched_prize_03@2x.png'},
-    {value: 50,     img: 'assets/images/tile_scratched_prize_04@2x.png'},
-    {value: 100,    img: 'assets/images/tile_scratched_prize_05@2x.png'},
-    {value: 500,    img: 'assets/images/tile_scratched_prize_06@2x.png'},
-    {value: 1000,   img: 'assets/images/tile_scratched_prize_07@2x.png'},
-    {value: 10000,  img: 'assets/images/tile_scratched_prize_08@2x.png'},
-    {value: 100000, img: 'assets/images/tile_scratched_prize_max@2x.png'}
-];
+import { PRIZES } from './prizes';
 
 export class Game extends PIXI.Application {
 
     private tiles:Tile[];
     private btnPlay:SimpleButton;
     private currentPrize:number;
+    private coins:AnimatedCoins;
 
     constructor () {
-        super(800, 600, {backgroundColor: 0x333333, legacy: true});
+        super(960, 554, {backgroundColor: 0x333333, legacy: true});
         document.body.appendChild(this.view);
 
         // set stage
@@ -35,14 +26,15 @@ export class Game extends PIXI.Application {
 
     private preload(): void {
         PIXI.loader.add('assets/images/bg.jpg');
-        PIXI.loader.add('assets/images/tile_underlay.png');
-        PIXI.loader.add('assets/images/tile_bg_scratched_default.png');
-        PIXI.loader.add('assets/images/tile_bg_unscratched.png');
+        PIXI.loader.add('assets/images/brush.png');
+        PIXI.loader.add('assets/images/coin.json');
 
-        for (let i = 0; i < VALUES.length; i++) {
-            PIXI.loader.add(VALUES[i].img);
+        if (window.devicePixelRatio < 2) {
+            PIXI.loader.add('assets/images/tiles.json');
+        } else {
+            PIXI.loader.add('assets/images/tiles@2x.json');
         }
-
+        
         PIXI.loader.load(this.setup.bind(this));
     }
 
@@ -55,15 +47,12 @@ export class Game extends PIXI.Application {
         for (let i = 0; i < 9; i++) {
             let col = i % 3;
             let row = Math.floor(i / 3);
-            let tile = new Tile(100, 100, this.renderer);
+            let tile = new Tile(this.renderer);
             tile.position.set(500 + 150 * col, 18 + 150 * row);
             tile.on('revealed', this.onTileRevealed, this);
             this.tiles.push(tile);
             this.stage.addChild(tile);
         }
-
-        // set new values to the tiles
-        this.newGame();
 
         // add button
         this.btnPlay = new SimpleButton(442, 50, 0xc3dc41);
@@ -71,14 +60,23 @@ export class Game extends PIXI.Application {
         this.btnPlay.on('pointerdown', this.onPointerDown, this);
         this.stage.addChild(this.btnPlay);
 
+        // add animated coins
+        this.coins = new AnimatedCoins();
+        this.stage.addChild(this.coins);
+
         // resize
         this.resize();
         window.addEventListener('resize', this.resize.bind(this));
+
+        // set new values to the tiles
+        this.newGame();
     }
 
     private newGame(): void {
-        let len:number = VALUES.length;
+        let len:number = PRIZES.length;
         let values:number[] = [];
+
+        this.coins.pause();
 
         for (let i = 0; i < len; i++) {
             values.push(0);
@@ -88,7 +86,7 @@ export class Game extends PIXI.Application {
         let limit = 3;
         this.currentPrize = - 1;
         while (index < len-1) {
-            let rnd = Math.floor(Math.random() * VALUES.length);
+            let rnd = Math.floor(Math.random() * PRIZES.length);
             if (values[rnd] < limit) { // max and only one
                 this.tiles[index].setPrize(rnd);
                 index++;
@@ -140,6 +138,7 @@ export class Game extends PIXI.Application {
             for (let i = 0; i < this.tiles.length; i++) {
                 if (this.tiles[i].prizeId === this.currentPrize) {
                     this.tiles[i].win();
+                    this.coins.play();
                 } else {
                     this.tiles[i].fail();
                 }
