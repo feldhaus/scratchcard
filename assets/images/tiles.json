@@ -1,0 +1,116 @@
+{"frames": {
+
+"tile_bg_scratched_default.png":
+{
+	"frame": {"x":1,"y":1,"w":142,"h":142},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":142,"h":142},
+	"sourceSize": {"w":142,"h":142}
+},
+"tile_bg_unscratched.png":
+{
+	"frame": {"x":145,"y":1,"w":142,"h":142},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":142,"h":142},
+	"sourceSize": {"w":142,"h":142}
+},
+"tile_scratched_freeplay.png":
+{
+	"frame": {"x":289,"y":145,"w":142,"h":117},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":25,"w":142,"h":117},
+	"sourceSize": {"w":142,"h":142}
+},
+"tile_scratched_prize_01.png":
+{
+	"frame": {"x":574,"y":145,"w":97,"h":94},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":23,"y":37,"w":97,"h":94},
+	"sourceSize": {"w":142,"h":142}
+},
+"tile_scratched_prize_02.png":
+{
+	"frame": {"x":433,"y":145,"w":139,"h":112},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":30,"w":139,"h":112},
+	"sourceSize": {"w":142,"h":142}
+},
+"tile_scratched_prize_03.png":
+{
+	"frame": {"x":145,"y":145,"w":142,"h":121},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":21,"w":142,"h":121},
+	"sourceSize": {"w":142,"h":142}
+},
+"tile_scratched_prize_04.png":
+{
+	"frame": {"x":577,"y":1,"w":142,"h":141},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":142,"h":141},
+	"sourceSize": {"w":142,"h":142}
+},
+"tile_scratched_prize_05.png":
+{
+	"frame": {"x":817,"y":143,"w":142,"h":128},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":13,"w":142,"h":128},
+	"sourceSize": {"w":142,"h":142}
+},
+"tile_scratched_prize_06.png":
+{
+	"frame": {"x":673,"y":144,"w":142,"h":127},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":15,"w":142,"h":127},
+	"sourceSize": {"w":142,"h":142}
+},
+"tile_scratched_prize_07.png":
+{
+	"frame": {"x":1,"y":145,"w":142,"h":124},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":14,"w":142,"h":124},
+	"sourceSize": {"w":142,"h":142}
+},
+"tile_scratched_prize_08.png":
+{
+	"frame": {"x":289,"y":1,"w":142,"h":142},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":142,"h":142},
+	"sourceSize": {"w":142,"h":142}
+},
+"tile_scratched_prize_max.png":
+{
+	"frame": {"x":817,"y":1,"w":142,"h":140},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":142,"h":140},
+	"sourceSize": {"w":142,"h":142}
+},
+"tile_underlay.png":
+{
+	"frame": {"x":433,"y":1,"w":142,"h":142},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":142,"h":142},
+	"sourceSize": {"w":142,"h":142}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "tiles.png",
+	"format": "RGBA8888",
+	"size": {"w":960,"h":272},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:572cfc452cb7163b7aab9065a41082ed:dfae1a81caa4205cd9ab8586fb79908b:accbe1e7e294ded8391337fc1c446319$"
+}
+}
