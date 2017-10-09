@@ -13,17 +13,15 @@ export class Tile extends PIXI.Container {
     private id:number;
     private renderer:PIXI.SystemRenderer;
     private renderTexture:PIXI.RenderTexture;
-    
     private prize:PIXI.Sprite;
     private label:PIXI.Text;
     private dragging:boolean;
     private points:PIXI.Point[];
 
-    readonly radius:number = 30;
-    readonly limit:number = 4;
-
     static brush:PIXI.Sprite;
     static rect:PIXI.Graphics;
+    static readonly brushRadius:number = 30;
+    static readonly maxCircles:number = 4;
 
 	constructor(renderer:PIXI.SystemRenderer) {
         super();
@@ -33,8 +31,8 @@ export class Tile extends PIXI.Container {
         // get the brush
         if (Tile.brush === undefined) {
             Tile.brush = PIXI.Sprite.fromImage('assets/images/brush.png');
-            Tile.brush.width = 60;
-            Tile.brush.height = 60;
+            Tile.brush.width = Tile.brushRadius * 2;
+            Tile.brush.height = Tile.brushRadius * 2;
             Tile.brush.anchor.set(0.5, 0.5);
         }
 
@@ -95,26 +93,38 @@ export class Tile extends PIXI.Container {
 
     private onPointerMove(event:PIXI.interaction.InteractionEvent): void {
         if (this.dragging) {
+            // add the brush
             let point:PIXI.Point = event.data.getLocalPosition(this);
             Tile.brush.rotation = Math.random() * Math.PI;
             Tile.brush.position.copy(point);
             this.renderer.render(Tile.brush, this.renderTexture, false, null, false);
 
-            if (this.points.length === 0) {
+            // point limits
+            if (point.x < Tile.brushRadius) {
+                point.x = Tile.brushRadius;
+            }
+            if (point.y < Tile.brushRadius) {
+                point.y = Tile.brushRadius;
+            }
+            if (point.x > this.width - Tile.brushRadius) {
+                point.x = this.width - Tile.brushRadius;
+            }
+            if (point.y > this.height - Tile.brushRadius) {
+                point.y = this.height - Tile.brushRadius;
+            }
+
+            if (this.points.length === 0) { // if is the first
                 this.points.push(point);
             } else {
                 let len:number = this.points.length;
-                let flag:number = 0;
                 for (let i = 0; i < len; i++) {
-                    if (!this.pointInCircle(this.points[i], point, this.radius)) {
-                        flag++;
+                    if (this.pointInCircle(this.points[i], point, Tile.brushRadius)) {
+                        return;
                     }
                 }
-                if (flag === len) {
-                    this.points.push(point);
-                    if (len >= this.limit) {
-                        this.reveal();
-                    }
+                this.points.push(point);
+                if (len >= Tile.maxCircles) {
+                    this.reveal();
                 }
             }
         }
@@ -136,17 +146,22 @@ export class Tile extends PIXI.Container {
     }
 
     public setPrize(prize:number): void {
+        // reset values
         this.points = [];
         this.dragging = false;
         this.interactive = true;
-
-        this.id = prize;
         this.prize.alpha = 1;
-        this.prize.texture = PIXI.Texture.fromFrame(PRIZES[this.id].img);
-        TweenMax.killTweensOf(this.prize.scale);
         this.prize.scale.set(0.7, 0.7);
+
+        // stop previous animations
+        TweenMax.killTweensOf(this.prize.scale);
+
+        // set the prize (id, texture and text)
+        this.id = prize;
+        this.prize.texture = PIXI.Texture.fromFrame(PRIZES[this.id].img);
         this.label.text = (this.id > 0) ? '$' + PRIZES[this.id].value : '';
 
+        // clean the render texture
         this.renderer.render(new PIXI.Graphics(), this.renderTexture, true, null, false);
     }
 

@@ -5,11 +5,12 @@ export class AnimatedCoins extends PIXI.Container {
     private emitter:Particles.Emitter;
     private elapsed:number;
 
-    constructor() {
+    constructor(width:number) {
         super();
 
         this.emitter = new Particles.Emitter(
-            this, 
+            this,
+            // the collection of particle images to use
             [
                 {
                     framerate: 20,
@@ -24,8 +25,7 @@ export class AnimatedCoins extends PIXI.Container {
                     ]
                 }
             ],
-            // Emitter configuration, edit this to change the look
-            // of the emitter
+            // emitter configuration, edit this to change the look of the emitter
             {
                 "alpha": {
                     "start": 1,
@@ -76,13 +76,16 @@ export class AnimatedCoins extends PIXI.Container {
                 "spawnRect": {
                     "x": 0,
                     "y": 0,
-                    "w": 480,
+                    "w": width,
                     "h": 10
                 }
             }
         );
         this.emitter.particleConstructor = Particles.AnimatedParticle;
         this.emitter.emit = false;
+
+        // start the update
+        this.update();
     }
 
     public play(): void {
@@ -91,9 +94,6 @@ export class AnimatedCoins extends PIXI.Container {
         
         // start emitting
         this.emitter.emit = true;
-
-        // start the update
-        this.update();
     }
 
     public pause(): void {
@@ -103,9 +103,7 @@ export class AnimatedCoins extends PIXI.Container {
 
     private update(): void {
         // update the next frame
-        if (this.emitter.emit) {
-            requestAnimationFrame(this.update.bind(this));
-        }
+        requestAnimationFrame(this.update.bind(this));
 
         // get current time
         let now = Date.now();

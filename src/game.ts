@@ -61,7 +61,7 @@ export class Game extends PIXI.Application {
         this.stage.addChild(this.btnPlay);
 
         // add animated coins
-        this.coins = new AnimatedCoins();
+        this.coins = new AnimatedCoins(480);
         this.stage.addChild(this.coins);
 
         // resize
@@ -76,12 +76,15 @@ export class Game extends PIXI.Application {
         let len:number = PRIZES.length;
         let values:number[] = [];
 
-        this.coins.pause();
-
+        // fill the value array with zeros 
         for (let i = 0; i < len; i++) {
             values.push(0);
         }
 
+        // puase the coins
+        this.coins.pause();
+
+        // define the prizes
         let index = 0;
         let limit = 3;
         this.currentPrize = - 1;
