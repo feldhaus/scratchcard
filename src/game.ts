@@ -17,9 +17,6 @@ export class Game extends PIXI.Application {
         super(960, 554, {backgroundColor: 0x333333, legacy: true});
         document.body.appendChild(this.view);
 
-        // set stage
-        this.stage = this.stage;
-
         // preload the assets
         this.preload();
     }
