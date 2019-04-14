@@ -28,7 +28,7 @@ This will optimize and minimize the compiled bundle in the dist folder.
 ## Credits
 
 + [PixiJS](https://github.com/pixijs)
-+ [CodeMirror](https://codemirror.net/) for the game images.
++ [Lottoland](https://www.lottoland.co.uk/scratchcards)
 
 ## License
 Copyright (c) 2019 Maicon Feldhaus
