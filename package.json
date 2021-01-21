@@ -12,7 +12,7 @@
     "devDependencies": {
         "pixi.js": "^4.5.6",
         "pixi-particles": "^2.1.7",
-        "gsap": "^1.20.3",
+        "gsap": "^3.6.0",
         "typescript": "^2.5.3",
         "tslint": "^5.7.0",
         "ts-loader": "^2.3.7",
@@ -23,6 +23,6 @@
     },
     "dependencies": {
         "pixi.js": "^4.5.6",
-        "gsap": "^1.20.3"
+        "gsap": "^3.6.0"
     }
 }
